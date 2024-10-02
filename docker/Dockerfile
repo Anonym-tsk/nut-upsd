@@ -105,7 +105,7 @@ RUN make install
 RUN adduser -D -h /var/run/nut nut; \
 	chgrp -R nut /etc/nut; \
 	chmod -R o-rwx /etc/nut; \
-	install -d -m 750 -o nut -g nut /var/run/nut \
+	install -d -m 750 -o nut -g nut /var/run/nut
 
 # cleanup
 RUN rm -rf /usr/src/nut; \
