@@ -109,7 +109,7 @@ RUN adduser -D -h /var/run/nut nut; \
 
 # cleanup
 RUN rm -rf /usr/src/nut; \
-    RUN apk del .build-deps
+    apk del .build-deps
 
 COPY docker-entrypoint.sh /usr/local/bin/
 ENTRYPOINT ["docker-entrypoint.sh"]
