@@ -89,12 +89,13 @@ RUN set -ex; \
 		openssh-client \
 		libusb-compat \
         nss \
+        libtool \
 	; \
 	# build dependencies
 	apk add --update --no-cache --virtual .build-deps \
 		build-base \
         ccache perl curl \
-        make autoconf automake libtool valgrind \
+        make autoconf automake valgrind \
         cppcheck gcc g++ clang python3 \
         libmodbus-dev
 
