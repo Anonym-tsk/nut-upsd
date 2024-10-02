@@ -59,7 +59,10 @@ RUN ./configure \
     --with-altpidpath=/var/run/nut \
     --with-user=nut \
     --with-group=nut \
-    --with-systemdsystemunitdir=no
+    --with-systemdsystemunitdir=no \
+
+RUN make -j 4 all
+RUN make -j 4 check
 
 # cleanup
 RUN rm -r /usr/share/man/man5 /usr/share/man/man8; \
