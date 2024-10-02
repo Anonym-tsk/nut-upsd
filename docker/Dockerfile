@@ -50,6 +50,8 @@ RUN ./configure \
     --datadir=/usr/share/nut \
     --with-nss \
     --with-openssl \
+    --with-dev \
+    --enable-maintainer-mode \
     --with-neon \
     --with-snmp \
     --with-drvpath=/usr/share/nut \
