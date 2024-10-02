@@ -45,11 +45,12 @@ RUN ./configure \
     --disable-dependency-tracking \
     --enable-strip \
     --disable-static \
-    --with-all=no \
+#    --enable-static \
+#    --with-all=no \
     --with-usb=yes \
     --datadir=/usr/share/nut \
-    --with-nss \
-    --with-openssl \
+#    --with-nss \
+#    --with-openssl \
     --with-dev \
     --enable-maintainer-mode \
     --with-neon \
