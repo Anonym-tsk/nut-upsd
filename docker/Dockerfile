@@ -19,7 +19,7 @@ RUN set -ex; \
         openssl-dev \
         nss-dev \
         neon-dev \
-		build-base \
+		build-base
 #    apk add ccache perl curl \
 #        make autoconf automake libtool valgrind \
 #        cppcheck gcc g++ clang python3 \
