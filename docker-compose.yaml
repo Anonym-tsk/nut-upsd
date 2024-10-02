@@ -1,0 +1,22 @@
+version: '3.8'
+services:
+  nut:
+    build: /volume2/docker/nut/nut-upsd/docker
+    image: nut-upsd
+    container_name: nut
+    restart: always
+    pull_policy: build
+    volumes:
+      - /volume2/docker/nut/data:/etc/nut
+    devices:
+      - /dev/bus/usb/001/011
+    environment:
+      - TZ=Europe/Moscow
+    ports:
+      - 3493:3493
+    cpu_shares: 50
+    deploy:
+      resources:
+        limits:
+          memory: 2048M
+    network_mode: bridge
