@@ -15,6 +15,7 @@ RUN set -ex; \
 	# build dependencies
 	apk add --update --no-cache --virtual .build-deps \
 		libusb-compat-dev \
+#        libusb-dev \
         net-snmp-dev \
         openssl-dev \
         nss-dev \
@@ -23,9 +24,7 @@ RUN set -ex; \
         ccache perl curl \
         make autoconf automake libtool valgrind \
         cppcheck gcc g++ clang python3 \
-        libmodbus-dev \
-#        libusb-dev \
-    ; \
+        libmodbus-dev
 
 WORKDIR /usr/src
 
