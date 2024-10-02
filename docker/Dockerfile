@@ -19,12 +19,13 @@ RUN set -ex; \
         openssl-dev \
         nss-dev \
         neon-dev \
-		build-base
-#    apk add ccache perl curl \
-#        make autoconf automake libtool valgrind \
-#        cppcheck gcc g++ clang python3 \
-#        libusb-dev libmodbus-dev \
-#    ; \
+		build-base \
+        ccache perl curl \
+        make autoconf automake libtool valgrind \
+        cppcheck gcc g++ clang python3 \
+        libmodbus-dev \
+#        libusb-dev \
+    ; \
 
 WORKDIR /usr/src
 
