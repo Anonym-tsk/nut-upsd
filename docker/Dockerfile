@@ -29,7 +29,7 @@ RUN set -ex; \
 WORKDIR /usr/src
 
 # download and extract
-RUN git clone --depth 1 -b $NUT_BRANCH https://github.com/networkupstools/nut
+RUN git clone -b $NUT_BRANCH https://github.com/networkupstools/nut
 WORKDIR /usr/src/nut
 
 # build
@@ -82,7 +82,8 @@ RUN set -ex; \
 	apk add --update --no-cache \
 		openssh-client \
 		libusb-compat \
-        nss
+        nss \
+        make
 
 COPY --from=builder /usr/src/nut /usr/src/nut
 WORKDIR /usr/src/nut
