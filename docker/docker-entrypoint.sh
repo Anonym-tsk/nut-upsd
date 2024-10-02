@@ -1,17 +1,17 @@
 #!/bin/sh
 
 if [ -z "$API_PASSWORD" ]; then
-  printf "No API_PASSWORD found"
+  echo "No API_PASSWORD found"
   API_PASSWORD=$(dd if=/dev/urandom bs=18 count=1 2>/dev/null | base64)
 fi
 
 if [ -z "$ADMIN_PASSWORD" ]; then
-  printf "No ADMIN_PASSWORD found"
+  echo "No ADMIN_PASSWORD found"
   ADMIN_PASSWORD=$(dd if=/dev/urandom bs=18 count=1 2>/dev/null | base64)
 fi
 
 if [ ! -e /etc/nut/ups.conf ]; then
-  printf "Default ups.conf created"
+  echo "Default ups.conf created"
   cat >/etc/nut/ups.conf <<EOF
 [$UPS_NAME]
 	desc = "$UPS_DESC"
@@ -19,20 +19,20 @@ if [ ! -e /etc/nut/ups.conf ]; then
 	port = $UPS_PORT
 EOF
 else
-  printf "Skipped ups.conf config"
+  echo "Skipped ups.conf config"
 fi
 
 if [ ! -e /etc/nut/upsd.conf ]; then
-  printf "Default upsd.conf created"
+  echo "Default upsd.conf created"
   cat >/etc/nut/upsd.conf <<EOF
 LISTEN ${API_ADDRESS:-0.0.0.0} ${API_PORT:-3493}
 EOF
 else
-  printf "Skipped upsd.conf config"
+  echo "Skipped upsd.conf config"
 fi
 
 if [ ! -e /etc/nut/upsd.users ]; then
-  printf "Default upsd.users created"
+  echo "Default upsd.users created"
   cat >/etc/nut/upsd.users <<EOF
 [admin]
 	password = $ADMIN_PASSWORD
@@ -45,17 +45,17 @@ if [ ! -e /etc/nut/upsd.users ]; then
 	upsmon master
 EOF
 else
-  printf "Skipped upsd.users config"
+  echo "Skipped upsd.users config"
 fi
 
 if [ ! -e /etc/nut/upsmon.conf ]; then
-  printf "Default upsmon.conf created"
+  echo "Default upsmon.conf created"
   cat >/etc/nut/upsmon.conf <<EOF
 MONITOR $UPS_NAME@localhost 1 monitor $API_PASSWORD master
 SHUTDOWNCMD "$SHUTDOWN_CMD"
 EOF
 else
-  printf "Skipped upsmon.conf config"
+  echo "Skipped upsmon.conf config"
 fi
 
 chgrp -R nut /etc/nut /dev/bus/usb
