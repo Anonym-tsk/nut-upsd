@@ -81,11 +81,19 @@ ENV SHUTDOWN_CMD="echo 'System shutdown not configured!'"
 
 # Find similar config in: https://git.alpinelinux.org/aports/tree/testing/nut/APKBUILD?id=17c662d69ebf24fbff2fa065d7544863ada956a5
 RUN set -ex; \
-	apk add --update --no-cache \
+	# run dependencies
+	apk add --update  --no-cache \
 		openssh-client \
 		libusb-compat \
         nss \
-        make
+	; \
+	# build dependencies
+	apk add --update --no-cache --virtual .build-deps \
+		build-base \
+        ccache perl curl \
+        make autoconf automake libtool valgrind \
+        cppcheck gcc g++ clang python3 \
+        libmodbus-dev
 
 COPY --from=builder /usr/src/nut /usr/src/nut
 WORKDIR /usr/src/nut
@@ -100,7 +108,8 @@ RUN adduser -D -h /var/run/nut nut; \
 	install -d -m 750 -o nut -g nut /var/run/nut \
 
 # cleanup
-RUN rm -rf /usr/src/nut
+RUN rm -rf /usr/src/nut; \
+    RUN apk del .build-deps
 
 COPY docker-entrypoint.sh /usr/local/bin/
 ENTRYPOINT ["docker-entrypoint.sh"]
