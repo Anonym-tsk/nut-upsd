@@ -65,8 +65,7 @@ RUN make -j 4 all
 RUN make -j 4 check
 
 # cleanup
-RUN rm -r /usr/share/man/man5 /usr/share/man/man8; \
-	apk del .build-deps
+RUN apk del .build-deps
 
 FROM alpine:3.20
 
@@ -101,8 +100,7 @@ RUN adduser -D -h /var/run/nut nut; \
 	install -d -m 750 -o nut -g nut /var/run/nut \
 
 # cleanup
-RUN rm -rf /usr/src/nut; \
-	rm -r /usr/share/man/man5 /usr/share/man/man8; \
+RUN rm -rf /usr/src/nut
 
 COPY docker-entrypoint.sh /usr/local/bin/
 ENTRYPOINT ["docker-entrypoint.sh"]
