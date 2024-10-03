@@ -5,11 +5,10 @@ services:
     image: nut-upsd
     container_name: nut
     restart: always
+    privileged: true
     pull_policy: build
     volumes:
       - /volume2/docker/nut/data:/etc/nut
-    devices:
-      - /dev/bus/usb/001/011
     environment:
       - TZ=Europe/Moscow
     ports:
