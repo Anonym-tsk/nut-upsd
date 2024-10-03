@@ -90,6 +90,7 @@ RUN set -ex; \
 		libusb-compat \
         nss \
         libtool \
+        util-linux-misc \
 	; \
 	# build dependencies
 	apk add --update --no-cache --virtual .build-deps \
@@ -117,6 +118,8 @@ RUN rm -rf /usr/src/nut; \
 
 COPY docker-entrypoint.sh /usr/local/bin/
 ENTRYPOINT ["docker-entrypoint.sh"]
+
+HEALTHCHECK CMD upsc $UPS_NAME@localhost 2>&1|grep -q stale && kill -SIGTERM -1 || true
 
 WORKDIR /var/run/nut
 
