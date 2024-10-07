@@ -119,7 +119,7 @@ RUN rm -rf /usr/src/nut; \
 COPY docker-entrypoint.sh /usr/local/bin/
 ENTRYPOINT ["docker-entrypoint.sh"]
 
-HEALTHCHECK --interval=30s --timeout=5s --retries=3 CMD upsc $UPS_NAME@localhost 2>&1|grep -qE "stale|Error" && kill -SIGTERM -1 || true
+HEALTHCHECK --interval=60s --timeout=15s --retries=3 CMD upsc $UPS_NAME@localhost 2>&1|grep -qE "stale|Error" && kill -SIGTERM -1 || true
 
 WORKDIR /var/run/nut
 
